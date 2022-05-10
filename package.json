@@ -1,0 +1,23 @@
+{
+  "name": "fly-rtsp-client",
+  "version": "1.0.0",
+  "description": "a rtsp client",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine --config=jasmine.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joinwen/rtsp-client.git"
+  },
+  "keywords": [
+    "rtsp",
+    "client"
+  ],
+  "author": "cywen",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "jasmine": "^4.1.0"
+  }
+}
