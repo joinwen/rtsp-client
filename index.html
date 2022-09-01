@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./jquery.js"></script>
+  <title>Websocket Header Field</title>
+  <script src="./axios.js"></script>
+</head>
+<body>
+<button onclick="handleClick()">23</button>
+<script>
+  class ZRtcError extends Error{
+    constructor(message, code, data) {
+      super(message);
+      this.msg = message;
+      this.stacks = this.stack;
+      this.code = code;
+      this.kind = "error";
+      this.flowType = "outer";
+      this.timestamp = new Date().toLocaleString();
+      this.extractData(data);
+    }
+    extractData(data) {
+      const properties = ["liveId", "streamId", "child", "requestData", "responseData"];
+      if(data) {
+        Object.keys(data).forEach(key => {
+          if(properties.includes(key)) {
+            let v = data[key];
+            if(v instanceof Error) {
+              v = JSON.stringify(v, Object.getOwnPropertyNames(v));
+              v = JSON.parse(v);
+            }
+            this[key] = v;
+          }
+        });
+      }
+    }
+    setFlowType(value) {
+      this.flowType = value;
+    }
+
+    /**
+     *
+     * @return {string}
+     */
+    toJson() {
+      return JSON.stringify(this);
+    }
+  }
+
+  var a = new Error("abc");
+  var b = new ZRtcError("join room failed", 502, {
+    child: new Error("abc"),
+    requestData: {
+      liveId: 233
+    }
+  })
+  axios({
+    method: "post",
+    url: "http://127.0.0.1:9091/home/index.html",
+    data: b
+  })
+  function handleClick(e) {
+    e = e || window.event;
+    console.log(JSON.stringify(e));
+  }
+
+  async function hi() {
+    try {
+      return await new Promise((resolve, reject) => {
+        reject({
+          a: "abc"
+        })
+      })
+    }catch (error) {
+      console.log(error);
+      window.dddd = error;
+    }
+
+  }
+</script>
+</body>
+</html>

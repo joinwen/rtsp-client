@@ -18,6 +18,11 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.32.0",
-    "jasmine": "^4.1.0"
+    "jasmine": "^4.1.0",
+    "ws": "^8.6.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "is-reachable": "^5.2.0"
   }
 }
